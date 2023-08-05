@@ -1,8 +1,8 @@
 // import LoginForm from "./components/loginForm/LoginForm"
 
 
-// import LoginForm from "./components/loginForm/LoginForm"
-// import ChangeMode from "./components/changeMode/ChangeMode"
+import LoginForm from "./components/loginForm/LoginForm"
+import ChangeMode from "./components/changeMode/ChangeMode"
 import LanguageSelector from "./components/selectLanguage/selectLanguage"
 import UserProfile from "./components/userProfile/UserProfile"
 import { ContextProvider } from "./provider/ContextProvider"
@@ -13,13 +13,14 @@ function App() {
   return (
     <>
     <ContextProvider>
-      {/* <ChangeMode/> */}
+      <ChangeMode/>
       <LanguageSelector/>
       <UserProfile/>
 
     </ContextProvider>
       {/* <LoginForm />
-      <UserProfile/> */}
+      <UserProfile/>  */}
+
     </>
   )
 }

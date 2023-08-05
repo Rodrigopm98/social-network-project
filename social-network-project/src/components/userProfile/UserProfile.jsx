@@ -1,5 +1,6 @@
-// import { useState } from 'react';
-// import axios from 'axios';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 import { Context } from "../../context/Context";
 import { useTranslate } from "../../hooks/useTranslate";
 import { Translations } from "../../translations/translations";
@@ -8,47 +9,32 @@ import { useContext } from "react";
 const UserProfile = () => {
   const context = useContext(Context);
   const translations = useTranslate(Translations(context));
+  const [userData, setUserData] = useState(null);
+  const { id } = useParams()
+  console.log(id);
+  useEffect(() => {
+    axios.get(`http://localhost:3000/auth/user/${id}`)
+      .then((response) => {
+        setUserData(response.data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }, [id]);
 
-
-    const userData = {
-        id: 1,
-        user_name: "Carlos",
-        email:"carlos@gmail.com",
-        id_rol :"user",
-        profile_picture: "https://pps.whatsapp.net/v/t61.24694-24/364213491_798269322079496_200322145048207137_n.jpg?ccb=11-4&oh=01_AdRUHMWH4r9sEWC6HUlqfrVdV5I03s0YZPRkEB2ERxhI3Q&oe=64D6B3AA",            
-        birthday: new Date("1990-05-15"),
-        gender: "male"
-    }
-    const formattedBirthday = new Date(userData.birthday).toLocaleDateString();//esto se sacaria una vez que tenga la fecha corecta que viene del back
-   
-//   const [userData, setUserData] = useState(null);
-
-//   useEffect(() => {
-
-//     axios.get('http://localhost:3000/api/user')
-//       .then((response) => {
-//         setUserData(response.data);
-//       })
-//       .catch((error) => {
-//         console.error('Error:', error);
-//       });
-//   }, []); 
-
-//   if (!userData) {
-   
-//     return <div>Loading...</div>;
-//   }
+  if (!userData) {
+    return <div>Loading...</div>;
+  }
 
   return (
-    <div className={`flex flex-col items-center justify-center p-4 rounded-lg shadow ${
-      context.clearTheme ? "bg-blue-500 text-black" : "bg-red-500 text-white"
-    }`}>
+    <div className={`flex flex-col items-center justify-center p-4 rounded-lg shadow ${context.clearTheme ? "bg-blue-500 text-black" : "bg-red-500 text-white"
+      }`}>
       <div className="w-32 h-32 rounded-full bg-gray-300 flex items-center justify-center">
         <img className="w-24 h-24 rounded-full" src={userData.profile_picture} alt="Profile" />
       </div>
       <h1 className="text-3xl font-bold mt-4">{userData.user_name}</h1>
       <p>Email: {userData.email}</p>
-      <p>{translations.birthday}: {formattedBirthday}</p>
+      <p>{translations.birthday}: {userData.birthday}</p>
       <p>{translations.gender}: {userData.gender}</p>
     </div>
   );

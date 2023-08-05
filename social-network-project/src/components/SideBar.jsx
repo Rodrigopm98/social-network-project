@@ -6,11 +6,13 @@ import {
   RiAccountCircleLine,
   RiSettings5Line,
 } from "react-icons/ri";
+import useAuthStore from "../store/useAuthStore";
 import { Link } from "react-router-dom";
 
 const SideBar = ({ showMenu }) => {
   const [isClicked, setIsClicked] = useState(" ");
   const [hidden, setHiddenMenu] = useState(false)
+  const { logged_id } = useAuthStore()
  
 
   const handleClickHome = () => {
@@ -66,7 +68,7 @@ const SideBar = ({ showMenu }) => {
             className={`my-4 md:my-6 lg:my-8 
         rounded-tl-xl rounded-bl-xl hover:bg-[#ffffff] w-full pt-2 pb-2 ${ isClicked == "account" ? "bg-black-50" : " " }`}
           >
-            <Link to={'#'}>
+            <Link to={`/home/user/${logged_id}`}>
               <RiAccountCircleLine />
             </Link>
           </li>

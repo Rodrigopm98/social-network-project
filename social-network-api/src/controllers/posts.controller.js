@@ -3,35 +3,47 @@ import { pool } from "../db.js";
 
 export const getPosts = async (req, res) => {
     try {
-        const [rows] = await pool.query('SELECT * FROM posts')
-        res.json(rows)
+        const query = `
+            SELECT posts.*, users.user_name, users.profile_picture,users.birthday, users.gender, users.id_rol
+            FROM posts
+            INNER JOIN users ON posts.id_user = users.id_user
+        `;
+        const [rows] = await pool.query(query);
+        res.json(rows);
     } catch (error) {
         console.error(error);
         return res.status(500).json({
             message: 'Algo salió mal.'
-        })
+        });
     }
 }
 
 export const getPost = async (req, res) => {
     try {
         const postId = req.params.id;
-        const [rows] = await pool.query('SELECT * FROM posts WHERE id_posts = ?', [postId])
+        const query = `
+            SELECT posts.*, users.user_name
+            FROM posts
+            INNER JOIN users ON posts.id_user = users.id_user
+            WHERE posts.id_posts = ?
+        `;
+        const [rows] = await pool.query(query, [postId]);
 
         if (rows.length <= 0) {
             return res.status(404).json({
                 message: 'Posteo no encontrado.'
-            })
+            });
         }
 
-        res.json(rows[0])
+        res.json(rows[0]);
     } catch (error) {
         console.error(error);
         return res.status(500).json({
             message: 'Algo salió mal.'
-        })
+        });
     }
 }
+
 
 export const createPost = async (req, res) => {
     const { id_user, content } = req.body;

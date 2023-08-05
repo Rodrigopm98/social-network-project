@@ -48,7 +48,7 @@ export const loginUser = async (req, res) => {
         }
 
         res.send({
-            id: user.id,
+            id: user.id_user,
             user_name: user.user_name,
             email: user.email,
             id_rol: user.id_rol,
@@ -61,3 +61,34 @@ export const loginUser = async (req, res) => {
         return res.status(500).json({ message: 'Algo salió mal al iniciar sesión' });
     }
 };
+export const getUsers = async (req, res) => {
+    try {
+        const [rows] = await pool.query('SELECT * FROM users')
+        res.json(rows)
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            message: 'Algo salió mal.'
+        })
+    }
+}
+
+export const getUser = async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const [rows] = await pool.query('SELECT * FROM users WHERE id_user = ?', [userId])
+
+        if (rows.length <= 0) {
+            return res.status(404).json({
+                message: 'Usuario no encontrado.'
+            })
+        }
+
+        res.json(rows[0])
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            message: 'Algo salió mal.'
+        })
+    }
+}

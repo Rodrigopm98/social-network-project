@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import useModal from '../../hooks/useModal';
 import Modal from '../Modal/Modal';
+import useAuthStore from '../../store/useAuthStore'
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -12,6 +13,7 @@ const LoginForm = () => {
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const navigate = useNavigate();
   const { showModal, closeModal, modalTitle, modalMessage, showModalWindow } = useModal();
+  const { login } = useAuthStore();
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
@@ -37,7 +39,7 @@ const LoginForm = () => {
       const response = await axios.post('http://localhost:3000/auth/login', { email, password })
         if (response.status === 200) {
           const userData = response.data;
-          //login(userData) estado global
+          login(userData)
           navigate('/home')
         } else {
           showModal('Error', 'An error occurred')
