@@ -15,9 +15,7 @@ const ChangeMode = () => {
       onClick={changeTheme}
     >
       {context.clearTheme ? (
-        <div className="border-2 border-black rounded-full p-2 flex justify-center items-center w-12 h-12">
-          <MoonIcon />
-        </div>
+          <MoonIcon className="w-8 h-8" />
       ) : (
         <SunIcon className="w-8 h-8" />
       )}

@@ -7,7 +7,7 @@ const Modal = ({ onClose, modalTitle, modalMessage }) => {
         <h1 className="text-lg font-bold mb-4 text-center">{modalTitle}</h1>
         <p className="mb-4 text-center">{modalMessage}</p>
         <button
-          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          className="w-full bg-[#25fc98] hover:bg-[#15b575] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           type="button"
           onClick={onClose}
         >

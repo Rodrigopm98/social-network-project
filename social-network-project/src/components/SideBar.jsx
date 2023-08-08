@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import {
   RiHome2Line,
   RiCalendarEventLine,
@@ -8,12 +8,19 @@ import {
 } from "react-icons/ri";
 import useAuthStore from "../store/useAuthStore";
 import { Link } from "react-router-dom";
+import { Context } from "../context/Context";
+
 
 const SideBar = ({ showMenu }) => {
   const [isClicked, setIsClicked] = useState(" ");
-  const [hidden, setHiddenMenu] = useState(false)
+  // const [hidden, setHiddenMenu] = useState(false)
   const { logged_id } = useAuthStore()
- 
+  const context = useContext(Context);
+  const themeBackground = context.clearTheme ? "bg-black-100" : "bg-[#333333]";
+  const textColor = context.clearTheme ? "600" : "100"
+  const sideHoverButtonBackground = context.clearTheme ? "hover:bg-[#ffffff]" : "hover:bg-gray-300 hover:text-black-600" ;
+
+
 
   const handleClickHome = () => {
     setIsClicked("home");
@@ -49,14 +56,14 @@ const SideBar = ({ showMenu }) => {
   return (
     <>
       <nav
-        className={`bg-black-100 md:left-0 fixed w-20 top-14 bottom-0 h-90 text-center ${ showMenu ? "  " : " -left-full" }`}
+        className={`${themeBackground} md:left-0 fixed w-20 top-14 bottom-0 h-90 text-center ${ showMenu ? "  " : " -left-full" }`}
       >
-        <ul className="flex flex-col justify-between text-4xl pl-5 text-black-600">
+        <ul className={`flex flex-col justify-between text-4xl pl-5 text-black-${textColor}`}>
           <li
             onClick={handleClickHome}
             title="Inicio"
             className={`my-4 md:my-6 lg:my-8 
-        rounded-tl-xl rounded-bl-xl hover:bg-[#ffffff] w-full pt-2 pb-2 ${ isClicked == "home" ? "bg-black-50" : " " }`}
+        rounded-tl-xl rounded-bl-xl ${sideHoverButtonBackground} w-full pt-2 pb-2 ${ isClicked == "home" ? "bg-black-50" : " " }`}
           >
             <Link to={'/home'}>
               <RiHome2Line />
