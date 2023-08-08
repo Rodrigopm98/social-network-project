@@ -1,6 +1,7 @@
+import { ContextProvider } from "./provider/ContextProvider"
 import { Outlet } from "react-router-dom";
 import NavBar from "./components/NavBar"
-import { ContextProvider } from "./provider/ContextProvider";
+
 
 function App() {
   

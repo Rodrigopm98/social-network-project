@@ -22,10 +22,9 @@ export const getPost = async (req, res) => {
     try {
         const postId = req.params.id;
         const query = `
-            SELECT posts.*, users.user_name
-            FROM posts
-            INNER JOIN users ON posts.id_user = users.id_user
-            WHERE posts.id_posts = ?
+        select posts.*, users.profile_picture FROM posts
+        INNER JOIN users ON posts.id_user = users.id_user
+        where users.id_user = ?;
         `;
         const [rows] = await pool.query(query, [postId]);
 
@@ -35,7 +34,7 @@ export const getPost = async (req, res) => {
             });
         }
 
-        res.json(rows[0]);
+        res.json(rows);
     } catch (error) {
         console.error(error);
         return res.status(500).json({
