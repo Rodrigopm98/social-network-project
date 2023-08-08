@@ -4,11 +4,13 @@ import NavBar from "../NavBar";
 
 const socket = io("http://localhost:3000");
 
+
 const Chat = () => {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
+  const [userName, setUserName] = useState(localStorage.userName);
   const chatRef = useRef(null);
-
+  
   const handleSubmit = (event) => {
     event.preventDefault();
     const newMessage = {
@@ -19,6 +21,7 @@ const Chat = () => {
     setMessages([...messages, newMessage]);
     socket.emit("message", message);
     setMessage("");
+    
   };
 
   useEffect(() => {
@@ -29,6 +32,7 @@ const Chat = () => {
   }, []);
 
   const reciveMessage = (message) => {
+    message.from = userName
     setMessages((state) => [...state, message]);
   };
 
