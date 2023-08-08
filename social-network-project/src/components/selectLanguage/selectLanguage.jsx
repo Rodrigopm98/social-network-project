@@ -7,7 +7,7 @@ import { FlagIcon } from "react-flag-kit";
 const LANGUAGES = {
   en: "US",
   es: "ES",
-  // fr: "FR",
+  fr: "FR",
   // it: "IT",
   // ru: "RU",
   // zh: "CN",
