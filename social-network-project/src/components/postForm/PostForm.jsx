@@ -1,12 +1,10 @@
 import { useState } from 'react';
 import { User, Send } from 'react-feather';
 import axios from 'axios';
-import useAuthStore from '../../store/useAuthStore';
 
 const PostForm = () => {
-  const { logged_id } = useAuthStore()
   const [formData, setFormData] = useState({
-    id_user: logged_id,
+    id_user: 1,
     content: ''
   })
 
@@ -53,7 +51,7 @@ const PostForm = () => {
         </div>
         <div className="flex-shrink-0">
           <button
-            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="bg-[#25fc98] hover:bg-[#15b575] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             onClick={handleSubmit}
           >
             <Send className="w-6 h-6" />

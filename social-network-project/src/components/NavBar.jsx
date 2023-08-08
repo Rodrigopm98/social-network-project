@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
     const [showMenu, setShowMenu] = useState(false);
-    const { isLoggedIn } = useAuthStore();
     const logout = useAuthStore((state) => state.logout);
     const [filterUser, setFilterUser] = useState('');
     const navigate = useNavigate()
@@ -65,10 +64,8 @@ const NavBar = () => {
                 <ul className="flex justify-end items-center w:2/3 md:w-1/3 ">
                     <li className="text-4xl mr-4 text-black-600 hover:bg-[#ffffff] rounded-lg" ><a href="/" ><RiEmphasisCn /></a></li>
                     <li className="text-4xl mr-4 text-black-600 hover:bg-[#ffffff] rounded-lg"><a href="/"><RiContrastFill /></a></li>
-                    {isLoggedIn ? <li className="hidden md:block"><button className="mr-4 bg-blue-500 text-white hover:bg-blue-400 px-4 py-2 rounded-lg shadow-md" onClick={handleLogout}>Cerrar sesión</button></li>
-                        : <><li className="hidden md:block"><button className="mr-4 bg-blue-500 text-white hover:bg-blue-400  px-4 py-2 rounded-lg shadow-md" >Registrase</button></li>
-                            <li className="hidden md:block"><button className="mr-4 bg-blue-500 text-white hover:bg-blue-400 px-4 py-2 rounded-lg shadow-md">Iniciar Sesión</button></li></>
-                    }
+                    <li><button className="mr-4 bg-[#25fc98] text-white hover:bg-[#15b575] px-4 py-2 rounded-lg shadow-md" onClick={handleLogout}>Cerrar sesión</button></li>
+                    
 
                 </ul>
             </nav>
@@ -76,5 +73,4 @@ const NavBar = () => {
         </>
     )
 }
-
 export default NavBar

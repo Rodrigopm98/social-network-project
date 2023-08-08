@@ -109,7 +109,7 @@ const RegisterForm = ({ onClose }) => {
       const response = await axios.post('http://localhost:3000/auth/registro', newUser)
 
       if (response.status === 201) {
-        const userData = response.data;
+        // const userData = response.data;
 
         // login(userData) estado global
         navigate('/home')
@@ -201,7 +201,7 @@ const RegisterForm = ({ onClose }) => {
 
         <div className="flex justify-end">
           <button
-            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2"
+            className="bg-[#25fc98]  hover:bg-[#15b575] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2"
             type="button"
             onClick={handleRegister}
           >

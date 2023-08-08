@@ -16,7 +16,6 @@ const ChangeMode = () => {
     >
       {context.clearTheme ? (
           <MoonIcon className="w-8 h-8" />
-       
       ) : (
         <SunIcon className="w-8 h-8" />
       )}
