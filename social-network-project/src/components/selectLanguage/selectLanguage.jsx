@@ -32,11 +32,11 @@ const SelectLanguage = () => {
   };
 
   return (
-    <div className="flex justify-center">
-      <div className="relative w-60 mr-10 flex justify-center items-center">
+    <div className="flex justify-center ">
+      <div className="relative flex justify-center items-center">
         <div onClick={() => setIsOpen(!isOpen)}>
-          <div className="flex items-center">
-            <FlagIcon code={LANGUAGES[selectedLanguage]} size={60} />
+          <div className="flex items-center p-1">
+            <FlagIcon code={LANGUAGES[selectedLanguage]} size={40} />
             <ChevronDownIcon className="ml-2 h-5 w-5" />
           </div>
         </div>
