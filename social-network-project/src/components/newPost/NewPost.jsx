@@ -43,7 +43,7 @@ const NewPost = ({ post }) => {
     }
 
     return (
-        <div className={`${themeBackground} p-4 rounded-lg shadow m-1 hover:ring-2 hover:ring-[#25fc98]`}>
+        <div className={`${themeBackground} p-4 rounded-lg shadow m-1 hover:ring-2 hover:ring-[#25fc98] `}>
             <div className="flex items-start space-x-4">
                 <div className="flex-shrink-0">
                     <div className="w-12 h-12 rounded-full bg-gray-300 flex items-center justify-center">

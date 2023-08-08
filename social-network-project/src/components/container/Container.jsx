@@ -33,7 +33,7 @@ const Container = () => {
     }, [posts]);
   
     return (
-      <div className={`${themeBackground} container mx-auto mt-12 p-4 sm:w-4/5 lg:w-3/5`}>
+      <div className={`${themeBackground} mx-auto mt-12 p-4 w-full flex flex-col items-center`}>
         <PostForm />
         <div className="mt-4">
           {posts.map((post) => (
