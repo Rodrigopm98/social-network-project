@@ -7,11 +7,11 @@ import axios from 'axios';
 import useModal from '../../hooks/useModal';
 import Modal from '../Modal/Modal';
 import useAuthStore from '../../store/useAuthStore';
-import SelectLanguage from "../selectLanguage/SelectLanguage"
 import ChangeMode from "../changeMode/ChangeMode"
 import { useTranslate } from '../../hooks/useTranslate';
 import { Translations } from '../../translations/translations';
 import { Context } from '../../context/Context';
+import SelectLanguage from '../selectLanguage/selectLanguage';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
