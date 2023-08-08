@@ -9,50 +9,48 @@ import UserProfile from "../components/userProfile/UserProfile";
 
 
 export const browserRouter = createBrowserRouter([
-    {
-        path: '/',
-        element: <LoginForm />,
-        errorElement: <NotFound />,
+  {
+    path: "/",
+    element: <LoginForm />,
+    errorElement: <NotFound />,
+    children: [
+      {
         children: [
-            {
-                children: [
-                    {
-                        element: <Container />
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        path: '/login',
-        element: <LoginForm />,
-        errorElement: <NotFound />,
+          {
+            element: <Container />,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    path: "/login",
+    element: <LoginForm />,
+    errorElement: <NotFound />,
+    index: true,
+  },
+  {
+    path: "/home",
+    element: <App />,
+    errorElement: <NotFound />,
+    children: [
+      {
+        path: "/home/*",
+        element: <Container />,
         index: true,
-    },
-    {
-        path: '/home',
-        element: <App />,
-        errorElement: <NotFound />,
-        children: [
-            {
-                path: '/home/*',
-                element: <Container/>,
-                index: true
-            },
-            {
-                path: '/home/config',
-                element: <UploadPicture />,
-            },
-            {
-                path: '/home/user/:id',
-                element: <UserProfile />,
-            }
-        ]
-    },
-    {
-        path: '/home/chat',
+      },
+      {
+        path: "/home/config",
+        element: <UploadPicture />,
+      },
+      {
+        path: "/home/user/:id",
+        element: <UserProfile />,
+      },
+      {
+        path: "/home/chat",
         element: <ChatRouter />,
-        errorElement: <NotFound />
-    }
-
-])
+      },
+    ],
+  },
+]);

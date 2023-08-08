@@ -15,6 +15,7 @@ const useAuthStore = create((set) => {
       set((state) => {
         localStorage.setItem('isLoggedIn', 'true');
         localStorage.setItem('logged_id', userData.id)
+        localStorage.setItem('userName', userData.user_name)
 
         return {
           ...state,
