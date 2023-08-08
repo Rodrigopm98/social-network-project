@@ -1,11 +1,18 @@
-import { useState } from 'react';
+
+import { useState, useContext } from 'react';
 import { Eye, EyeOff } from 'react-feather';
 import RegisterForm from '../registerForm/RegisterForm';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import useModal from '../../hooks/useModal';
 import Modal from '../Modal/Modal';
-import useAuthStore from '../../store/useAuthStore'
+import useAuthStore from '../../store/useAuthStore';
+import SelectLanguage from "../selectLanguage/SelectLanguage"
+import ChangeMode from "../changeMode/ChangeMode"
+import { useTranslate } from '../../hooks/useTranslate';
+import { Translations } from '../../translations/translations';
+import { Context } from '../../context/Context';
+
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -14,6 +21,11 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const { showModal, closeModal, modalTitle, modalMessage, showModalWindow } = useModal();
   const { login } = useAuthStore();
+  const context = useContext(Context);
+    const translations = useTranslate(Translations(context));
+    const themeBackground = context.clearTheme ? "bg-black-100" : "bg-[#333333]";
+    const textColor = context.clearTheme ? "600" : "100"
+
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
@@ -56,34 +68,39 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className='min-h-screen '>
+      <div className={`${themeBackground} flex justify-end p-3`}>
+        <SelectLanguage/>
+        <ChangeMode/>
+      </div>
+      <div className={`flex items-center justify-center min-h-screen ${themeBackground}`}>
       <div className="w-80 md:w-4/5 lg:w-2/5 mx-auto p-4">
-        <h1 className="text-3xl font-bold mb-4">Login</h1>
+        <h1 className="text-3xl font-bold mb-4">{translations.login}</h1>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+          <label className={`block text-gray-${textColor} text-sm font-bold mb-2`} htmlFor="email">
             Email:
           </label>
           <input
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-300"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-[#25fc98]"
             type="email"
             value={email}
             onChange={handleEmailChange}
             id="email"
-            placeholder="Enter your email"
+            placeholder={translations.enterYourEmail}
           />
         </div>
         <div className="mb-6 relative flex flex-col">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-            Password:
+          <label className= {`block text-gray-${textColor} text-sm font-bold mb-2`} htmlFor="password">
+            {translations.password}
           </label>
           <div>
             <input
-              className="w-full px-3 py-2 pl-10 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-300"
+              className="w-full px-3 py-2 pl-10 border border-gray-100 rounded-md focus:outline-none focus:ring focus:border-[#15b575]"
               type={showPassword ? 'text' : 'password'}
               value={password}
               onChange={handlePasswordChange}
               id="password"
-              placeholder="Enter your password"
+              placeholder={translations.enterPassword}
             />
             <div
               className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer mt-6"
@@ -99,7 +116,7 @@ const LoginForm = () => {
             type="button"
             onClick={handleLogin}
           >
-            Login
+            {translations.login}
           </button>
         </div>
         <div className="mt-4">
@@ -108,7 +125,7 @@ const LoginForm = () => {
             type="button"
             onClick={openRegisterModal}
           >
-            Create New Account
+            {translations.creatNaccount}
           </button>
         </div>
         {showRegisterModal && <RegisterForm onClose={closeRegisterModal} />}
@@ -121,6 +138,9 @@ const LoginForm = () => {
       )}
       </div>
     </div>
+
+    </div>
+    
 
   );
 };

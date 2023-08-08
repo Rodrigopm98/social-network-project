@@ -1,6 +1,9 @@
 import { io } from "socket.io-client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import NavBar from "../NavBar";
+import { Translations } from "../../translations/translations";
+import { Context } from "../../context/Context";
+import { useTranslate } from "../../hooks/useTranslate";
 
 const socket = io("http://localhost:3000");
 
@@ -10,6 +13,12 @@ const Chat = () => {
   const [messages, setMessages] = useState([]);
   const [userName, setUserName] = useState(localStorage.userName);
   const chatRef = useRef(null);
+  const context = useContext(Context);
+  const translations = useTranslate(Translations(context));
+  const themeBackground = context.clearTheme ? "bg-black-100" : "bg-[#333333]";
+  const textColor = context.clearTheme ? "600" : "100"
+  const navbarHoverButtonBackground = context.clearTheme ? "hover:bg-[#ffffff]" : "hover:bg-gray-300 hover:text-black-600" ;
+
   
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -47,7 +56,7 @@ const Chat = () => {
   return (
     <>
       <NavBar />
-      <div className="h-screen mt-14 flex flex-col justify-end items-center p-4 md:w-1/3 md:fixed md:right-0 pb-16  md:border-l-4 md:border-black-100">
+      <div className={`${themeBackground} h-screen mt-14 flex flex-col justify-end items-center p-4 md:w-1/3 md:fixed md:right-0 pb-16  md:border-l-4 md:border-black-100`}>
         <ul ref={chatRef} className="flex-grow w-full overflow-y-scroll">
           {messages.map((message, i) => (
             <li
@@ -69,13 +78,13 @@ const Chat = () => {
         >
           <input
             type="text"
-            className="border w-full md:w-11/12 lg:w-full border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="border w-full md:w-11/12 lg:w-full border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#25fc98]"
             placeholder="Escribe tu mensaje..."
             value={message}
             onChange={handleChange}
           />
           <button className=" px-4 py-2 bg-[#25fc98] text-white rounded-lg shadow-md hover:bg-[#15b575] focus:outline-none focus:ring-2 focus:ring-blue-400">
-            Enviar
+            {translations.send}
           </button>
         </form>
       </div>
