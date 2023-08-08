@@ -1,7 +1,7 @@
 import { Context } from "../context/Context";
 import { useState } from "react";
 export const ContextProvider = ({ children }) => {
-  const [clearTheme, setClearTheme] = useState(true);
+  const [clearTheme, setClearTheme] = useState(false)
   const [language, setLanguage] = useState("en");
 
   const context = {
