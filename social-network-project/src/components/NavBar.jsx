@@ -1,4 +1,4 @@
-import { RiSearchLine, RiContrastFill, RiEmphasisCn, RiMenuLine } from "react-icons/ri";
+import { RiSearchLine, RiMenuLine } from "react-icons/ri";
 import { useState, useContext} from "react";
 import useAuthStore from '../store/useAuthStore'
 import SideBar from "./SideBar";
