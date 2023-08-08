@@ -11,7 +11,7 @@ const ChangeMode = () => {
 
   return (
     <button
-      className={`text-2xl ${context.clearTheme ? "text-black" : "text-red"}`}
+      className={`p-1 text-2xl ${context.clearTheme ? "text-black" : "text-red"}`}
       onClick={changeTheme}
     >
       {context.clearTheme ? (

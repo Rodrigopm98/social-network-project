@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { Context } from "../context/Context";
 import { useTranslate } from "../hooks/useTranslate";
 import { Translations } from "../translations/translations";
+import SelectLanguage from "../components/selectLanguage/selectLanguage"
+import ChangeMode from "../components/changeMode/ChangeMode"
 
 
 const NavBar = () => {
@@ -73,8 +75,8 @@ const NavBar = () => {
                     <button className="absolute right-0 top-1 mt-2 mr-3" onClick={handleSubmit}><RiSearchLine /></button>
                 </form>
                 <ul className="flex justify-end items-center w:2/3 md:w-1/3 ">
-                    <li className={`text-4xl mr-4 text-black-${textColor} ${navbarHoverButtonBackground} rounded-lg`} ><a href="/" ><RiEmphasisCn /></a></li>
-                    <li className={`text-4xl mr-4 text-black-${textColor} ${navbarHoverButtonBackground} rounded-lg`}><a href="/"><RiContrastFill /></a></li>
+                    <li className={`text-4xl mr-4 text-black-${textColor} ${navbarHoverButtonBackground} rounded-lg`} ><SelectLanguage/></li>
+                    <li className={`text-4xl mr-4 text-black-${textColor} ${navbarHoverButtonBackground} rounded-lg`}><ChangeMode/></li>
                     <li><button className="mr-4 bg-[#25fc98] text-white hover:bg-[#15b575] px-4 py-2 rounded-lg shadow-md" onClick={handleLogout}>{translations.signOff}</button></li>
                     
 
