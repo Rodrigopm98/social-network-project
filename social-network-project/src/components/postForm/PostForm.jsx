@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { User, Send } from 'react-feather';
 import axios from 'axios';
+import useAuthStore from '../../store/useAuthStore';
 
 const PostForm = () => {
+  const { logged_id } = useAuthStore()
   const [formData, setFormData] = useState({
-    id_user: 1,
+    id_user: logged_id,
     content: ''
   })
 

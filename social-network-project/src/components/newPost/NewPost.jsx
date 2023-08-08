@@ -56,13 +56,13 @@ const NewPost = ({ post }) => {
           </div> : null
         }
       </div>
-      {showModalWindow && (
+      {showModalWindow ? (
         <EditAndDeleteModal
           isEdit={isEdit}
           onClose={closeModal}
           id_posts={post.id_posts}
         />
-      )}
+      ):null}
     </div>
     
   )
