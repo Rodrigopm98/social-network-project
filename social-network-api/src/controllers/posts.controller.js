@@ -22,10 +22,9 @@ export const getPost = async (req, res) => {
     try {
         const postId = req.params.id;
         const query = `
-            SELECT posts.*, users.user_name
-            FROM posts
-            INNER JOIN users ON posts.id_user = users.id_user
-            WHERE posts.id_posts = ?
+        select posts.*, users.profile_picture FROM posts
+        INNER JOIN users ON posts.id_user = users.id_user
+        where users.id_user = ?;
         `;
         const [rows] = await pool.query(query, [postId]);
 
@@ -35,7 +34,7 @@ export const getPost = async (req, res) => {
             });
         }
 
-        res.json(rows[0]);
+        res.json(rows);
     } catch (error) {
         console.error(error);
         return res.status(500).json({
@@ -93,5 +92,41 @@ export const deletePost = async (req, res) => {
         return res.status(500).json({
             message: 'Algo salió mal.'
         })
+    }
+}
+
+export const updatePost = async (req, res) => {
+    const postId = req.params.id;
+    const { content } = req.body;
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    try {
+        const [checkRows] = await pool.query('SELECT id_posts FROM posts WHERE id_posts = ?', [postId]);
+        if (checkRows.length === 0) {
+            return res.status(404).json({
+                message: 'Posteo no encontrado.'
+            });
+        }
+
+        const [rows] = await pool.query('UPDATE posts SET content = ? WHERE id_posts = ?', [content, postId]);
+
+        if (rows.affectedRows === 0) {
+            return res.status(404).json({
+                message: 'Posteo no encontrado.'
+            });
+        }
+
+        res.status(200).json({
+            message: 'Posteo actualizado exitosamente.'
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            message: 'Algo salió mal al actualizar el posteo.'
+        });
     }
 }
