@@ -1,75 +1,65 @@
-<<<<<<< HEAD
-import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-=======
->>>>>>> e51da7c12828c24d1fe0d09396f51e429fc9b7f6
 import { Context } from "../../context/Context";
 import { useTranslate } from "../../hooks/useTranslate";
 import { Translations } from "../../translations/translations";
-import { useParams } from "react-router-dom";
-import axios from "axios";
 import Spinner from "../spinner/Spinner";
 import { useEffect, useState, useContext } from "react";
+import NewPost from '../newPost/NewPost';
 
 const DEFAULT_IMG = 'https://static.vecteezy.com/system/resources/previews/002/519/144/non_2x/social-media-avatar-free-vector.jpg'
 
 
 const UserProfile = () => {
-<<<<<<< HEAD
-  const context = useContext(Context);
-  const translations = useTranslate(Translations(context));
-  const [userData, setUserData] = useState(null);
-  const { id } = useParams()
-  console.log(id);
-  useEffect(() => {
-    axios.get(`http://localhost:3000/auth/user/${id}`)
-      .then((response) => {
-        setUserData(response.data);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-  }, [id]);
-
-  if (!userData) {
-    return <div>Loading...</div>;
-  }
-
-  return (
-    <div className={`flex flex-col items-center justify-center p-4 rounded-lg shadow ${context.clearTheme ? "bg-blue-500 text-black" : "bg-red-500 text-white"
-      }`}>
-      <div className="w-32 h-32 rounded-full bg-gray-300 flex items-center justify-center">
-        <img className="w-24 h-24 rounded-full" src={userData.profile_picture} alt="Profile" />
-      </div>
-      <h1 className="text-3xl font-bold mt-4">{userData.user_name}</h1>
-      <p>Email: {userData.email}</p>
-      <p>{translations.birthday}: {userData.birthday}</p>
-      <p>{translations.gender}: {userData.gender}</p>
-    </div>
-  );
-=======
     const context = useContext(Context);
     const translations = useTranslate(Translations(context));
     const [userData, setUserData] = useState(null);
     const { id } = useParams()
+    const [posts, setPosts] = useState([])
+
 
     useEffect(() => {
-        axios
-            .get(`http://localhost:3000/auth/user/${id}`)
-            .then((response) => {
+        async function fetchUserData() {
+            try {
+                const response = await axios.get(`http://localhost:3000/auth/user/${id}`);
                 setUserData(response.data);
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-            });
+            } catch (error) {
+                console.error("Error al obtener los datos del usuario:", error);
+            }
+        }
+
+        setPosts([])
+        async function fetchPosts() {
+            try {
+                const response = await axios.get(`http://localhost:3000/api/posts/${id}`);
+
+                const sortedPosts = response.data.sort((a, b) => new Date(b.publication_date) - new Date(a.publication_date))
+                setPosts(sortedPosts);
+            } catch (error) {
+                console.error('Error al obtener los posteos:', error);
+
+            }
+        }
+
+        fetchUserData();
+        fetchPosts();
     }, [id]);
 
-    if (!userData) {
+    if (!userData || !posts) {
         return <Spinner />;
     }
 
     const themeBackground = context.clearTheme ? "bg-withe" : "bg-[#333333]";
+
+    const utcDateFromApi = new Date(userData.birthday);
+    const utcMilliseconds = utcDateFromApi.getTime();
+    const millisecondsInDay = 60 * 60 * 1000;
+    const nextDayMilliseconds = utcMilliseconds + millisecondsInDay;
+    const nextDayDate = new Date(nextDayMilliseconds);
+    const day = nextDayDate.getUTCDate();
+    const month = nextDayDate.getUTCMonth() + 1; 
+    const year = nextDayDate.getUTCFullYear();
+    const formattedDate = `${day.toString().padStart(2, '0')}/${month.toString().padStart(2, '0')}/${year}`;
 
     return (
         <div
@@ -95,7 +85,7 @@ const UserProfile = () => {
                         clipRule="evenodd"
                     />
                 </svg>
-                <p className="text-sm text-gray-500">E-mail: {userData.gender}</p>
+                <p className="text-sm text-gray-500">E-mail: {userData.email}</p>
             </div>
             <div className="flex items-center space-x-2 mb-4">
                 <svg
@@ -109,7 +99,7 @@ const UserProfile = () => {
                     />
                 </svg>
                 <p className="text-sm text-gray-500">
-                    {translations.birthday}: {userData.birthday}
+                    {translations.birthday}: {formattedDate}
                 </p>
             </div>
             <div className="flex items-center space-x-2">
@@ -129,9 +119,20 @@ const UserProfile = () => {
                     {translations.gender}: {userData.gender}
                 </p>
             </div>
+            {posts.length > 0 ? (
+                <div className="mt-4">
+                    {posts.map((post) => (
+                        <NewPost key={post.id_posts} post={post} />
+                    ))}
+                </div>
+            ) : (
+                <div className="mt-4">
+                    <h1>Este usuario no tiene posteos realizados.</h1>
+                </div>
+            )}
+
         </div>
     );
->>>>>>> e51da7c12828c24d1fe0d09396f51e429fc9b7f6
 };
 
 export default UserProfile;
