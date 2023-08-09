@@ -78,8 +78,6 @@ const NavBar = () => {
                     <li className={`text-4xl md:mr-4 text-black-${textColor} ${navbarHoverButtonBackground} rounded-lg`} ><SelectLanguage/></li>
                     <li className={`text-4xl md:mr-4 text-black-${textColor} ${navbarHoverButtonBackground} rounded-lg`}><ChangeMode/></li>
                     <li><button className="md:mr-4 bg-[#25fc98] text-white hover:bg-[#15b575] px-4 py-2 rounded-lg shadow-md" onClick={handleLogout}>{translations.signOff}</button></li>
-                    
-
                 </ul>
             </nav>
             <SideBar showMenu={showMenu} />

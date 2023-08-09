@@ -36,25 +36,25 @@ const SideBar = ({ showMenu }) => {
 
   return (
     <>
-      <nav className={`${themeBackground} md:left-0 fixed w-20 top-14 bottom-0 h-90 text-center ${showMenu && !hidden ? "" : "-left-full"}`}>
+      <nav className={`${themeBackground} border-r-2 md:left-0 fixed w-20 top-14 bottom-0 h-90 text-center ${showMenu && !hidden ? "" : "-left-full"}`}>
         <ul className={`flex flex-col justify-between text-4xl pl-5 text-black-${textColor}`}>
           {navItems.map((item) => {
             const isItemClicked = isClicked === item.name;
 
             return (
-              <li
+          <li
                 key={item.name}
-                onClick={handleHiddenMenu}
+            onClick={handleHiddenMenu}
                 title={item.name}
                 className={`my-4 md:my-6 lg:my-8 rounded-tl-xl rounded-bl-xl w-full pt-2 pb-2 ${sideHoverButtonBackground} ${isItemClicked ? "bg-black-50" : ""}`}
-              >
+          >
                 <NavLink
                   to={item.path}
                   onClick={() => setIsClicked(item.name)}
-                >
+          >
                   <item.icon />
-                </NavLink>
-              </li>
+            </NavLink>
+          </li>
             );
           })}
         </ul>
