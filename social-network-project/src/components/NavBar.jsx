@@ -10,6 +10,7 @@ import { Translations } from "../translations/translations";
 import SelectLanguage from "../components/selectLanguage/selectLanguage"
 import ChangeMode from "../components/changeMode/ChangeMode"
 import { RiLogoutCircleRLine } from "react-icons/ri";
+import logoImage from '../assets/T-Co_Logo.png';
 
 
 const NavBar = () => {
@@ -67,7 +68,7 @@ const NavBar = () => {
         <>
             <nav className={`${themeBackground} w-full fixed top-0 h-14 text-center flex justify-between items-center`}
       >
-                <h1 className=" w-20 hidden lg:block">LOGO</h1>
+                <img src={logoImage} alt="logo" className="w-16 hidden md:block ml-4" />
                 <button onClick={toggleMenu} className={`md:hidden text-4xl ml-2 text-black-600`}><RiMenuLine /></button>
                 <form className=" relative w-1/2">
                     <input type="text" placeholder={translations.searchUser}
