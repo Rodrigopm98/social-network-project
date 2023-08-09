@@ -21,7 +21,7 @@ const NavBar = () => {
     const themeBackground = context.clearTheme ? "bg-black-100" : "bg-[#333333]";
     const textColor = context.clearTheme ? "600" : "100"
     const navbarHoverButtonBackground = context.clearTheme ? "hover:bg-[#ffffff]" : "hover:bg-gray-300 hover:text-black-600" ;
-
+    const { isLoggedIn } = useAuthStore()
 
 
     const toggleMenu = () => {
@@ -74,12 +74,15 @@ const NavBar = () => {
                         onChange={handleChange} value={filterUser} />
                     <button className="absolute right-0 top-1 mt-2 mr-3" onClick={handleSubmit}><RiSearchLine /></button>
                 </form>
+
                 <ul className="flex justify-end items-center w:2/4 md:w-1/3 ">
                     <li className={`text-4xl md:mr-4 text-black-${textColor} ${navbarHoverButtonBackground} rounded-lg`} ><SelectLanguage/></li>
                     <li className={`text-4xl md:mr-4 text-black-${textColor} ${navbarHoverButtonBackground} rounded-lg`}><ChangeMode/></li>
-                    <li><button className="md:mr-4 bg-[#25fc98] text-white hover:bg-[#15b575] px-4 py-2 rounded-lg shadow-md" onClick={handleLogout}>{translations.signOff}</button></li>
-                    
-
+                    {
+                        isLoggedIn ?  <li><button className="mr-4 bg-[#25fc98] text-white hover:bg-[#15b575] px-4 py-2 rounded-lg shadow-md" onClick={handleLogout}>{translations.signOff}</button></li>: 
+                        null    
+                    }
+                   
                 </ul>
             </nav>
             <SideBar showMenu={showMenu} />

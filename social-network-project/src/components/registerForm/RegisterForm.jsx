@@ -1,9 +1,13 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import useModal from '../../hooks/useModal';
 import Modal from "../Modal/Modal"
 import axios from 'axios';
 import { useNavigate } from 'react-router';
+import { Context } from '../../context/Context';
+import { Translations } from '../../translations/translations';
+import { useTranslate } from '../../hooks/useTranslate';
+import useAuthStore from '../../store/useAuthStore';
 
 const RegisterForm = ({ onClose }) => {
   const [email, setEmail] = useState('');
@@ -11,10 +15,15 @@ const RegisterForm = ({ onClose }) => {
   const [username, setUsername] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const { showModal, closeModal, modalTitle, modalMessage, showModalWindow } = useModal();
-
+  const { login } = useAuthStore()
   const [birthdate, setBirthdate] = useState('');
   const [gender, setGender] = useState('');
   const navigate = useNavigate();
+
+  const context = useContext(Context);
+    const translations = useTranslate(Translations(context));
+    const themeBackground = context.clearTheme ? "bg-black-100" : "bg-black-200";
+    
 
   const MIN_PASSWORD_LENGTH = 6;
 
@@ -72,24 +81,27 @@ const RegisterForm = ({ onClose }) => {
     }
 
     if (!isValidEmail(email)) {
-      showModal('Invalid Email', 'Please enter a valid email address.');
+      showModal(`${translations.invalidEmail}`, `${translations.enterenterValidEmail}`);
       return;
     }
 
     if (password !== confirmPassword) {
-      showModal("Passwords don't match", "Please make sure the passwords match and try again.");
+      showModal(`${translations.passwordsDoNotMatch}`, `${translations.passwordsMatchError}`);
+
       return;
     }
     if (password.length < MIN_PASSWORD_LENGTH) {
-      showModal("Password too short", "Password must have at least 6 characters.");
+      showModal(`${translations.passwordTooShort}`, `${translations.passwordLengthError}`);
+
       return;
     }
     if (!isValidUserName(username)) {
-      showModal('Invalid Username', 'Username can only contain letters, numbers, and underscores.');
+      showModal(`${translations.invalidUsername}`, `${translations.invalidUsernameError}`);
       return;
     }
     if (!birthdate) {
-      showModal('Error', 'Please enter your birthdate.');
+      showModal(`${translations.missingBirthdate}`, `${translations.missingBirthdateError}`);
+
       return;
     }
     if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDateValue.getDate())) {
@@ -97,32 +109,35 @@ const RegisterForm = ({ onClose }) => {
     }
 
     if (age < 18) {
-      showModal('Invalid Age', 'You must be at least 18 years old to register.');
+      showModal(`${translations.invalidAge}`, `${translations.ageRestrictionError}`);
+
       return;
     }
 
     if (gender !== 'male' && gender !== 'female' && gender !== 'custom') {
-      showModal('Error', 'Please select a gender.');
+      showModal(`${translations.error}`, `${translations.selectGender}`);
+
       return;
     }
     try {
       const response = await axios.post('http://localhost:3000/auth/registro', newUser)
 
       if (response.status === 201) {
-        // const userData = response.data;
-
-        // login(userData) estado global
+        const userData = response.data.user;
+        console.log(response.data.user);
+        login(userData)
         navigate('/home')
       } else {
-        showModal('Error', 'An error occurred')
+      showModal(`${translations.error}`, `${translations.errorMessage}`);
       }
     } catch (error) {
       if (error.response && error.response.status === 400) {
-        showModal('Error', 'Please fill in all required fields.')
+        showModal(`${translations.error}`, `${translations.fillRequiredFieldsMessage}`);
       } else if (error.response && error.response.status === 409) {
-        showModal('Invalid account', 'Account already created')
+        showModal(`${translations.invalidAccountTitle}`, `${translations.invalidAccountMessage}`);
       } else {
-        showModal('Error', 'Server error')
+        showModal(`${translations.error}`, `${translations.serverErrorMessage}`);
+
       }
     }
 
@@ -130,74 +145,82 @@ const RegisterForm = ({ onClose }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-white p-6 rounded-md shadow-md md:w-4/5 lg:w-2/5">
-        <h1 className="text-2xl font-bold mb-4">Let&apos;s Register</h1>
-        <h2 className="text-lg text-gray-600 mb-4">It&apos;s easy and fast</h2>
+      <div className={`${themeBackground} p-6 rounded-md shadow-md md:w-4/5 lg:w-2/5`}>
+        <h1 className="text-2xl font-bold mb-4">{translations.letsRegister}</h1>
+        <h2 className="text-lg text-gray-600 mb-4">{translations.itsEasy}</h2>
         <input
           className="w-full px-3 py-2 mb-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-300"
           type="email"
           value={email}
           onChange={handleEmailChange}
-          placeholder="Enter your email"
+          placeholder={translations.enterYourEmail}
         />
         <input
           className="w-full px-3 py-2 mb-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-300"
           type="password"
           value={password}
+
           onChange={handlePasswordChange}
-          placeholder="Enter your password"
+          placeholder={translations.enterPassword}
         />
         <input
           className="w-full px-3 py-2 mb-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-300"
           type="password"
           value={confirmPassword}
           onChange={handleConfirmPasswordChange}
-          placeholder="Confirm your password"
+          placeholder={translations.confirmPassword}
         />
         <input
           className="w-full px-3 py-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-300"
           type="text"
           value={username}
           onChange={handleUsernameChange}
-          placeholder="Enter your username"
+          placeholder={translations.username}
         />
         {/* fecha de nacimiento */}
+        <label htmlFor="birthdate" className="block text-gray-700 text-sm font-bold mb-1">
+            {translations.birthday}
+        </label>
         <input
           className="w-full px-3 py-2 mb-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-300"
           type="date"
           value={birthdate}
           onChange={handleBirthdateChange}
-          placeholder="Enter your birthdate"
+          placeholder={translations.enterBirthdate}
         />
 
-        {/* checkbox sexo */}
-        <label>
-          <input
-            type="checkbox"
-            value="male"
-            checked={gender === 'male'}
-            onChange={handleGenderChange}
-          />
-          Male
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value="female"
-            checked={gender === 'female'}
-            onChange={handleGenderChange}
-          />
-          Female
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value="custom"
-            checked={gender === 'custom'}
-            onChange={handleGenderChange}
-          />
-          Custom
-        </label>
+        <div className="mb-4">
+            <label htmlFor="gender" className="block text-gray-700 text-sm font-bold mb-1">
+                {translations.gender}
+            </label>
+            <label>
+                <input
+                    type="checkbox"
+                    value="male"
+                    checked={gender === 'male'}
+                    onChange={handleGenderChange}
+                />
+                {translations.male}
+            </label>
+            <label>
+                <input
+                    type="checkbox"
+                    value="female"
+                    checked={gender === 'female'}
+                    onChange={handleGenderChange}
+                />
+                {translations.female}
+            </label>
+            <label>
+                <input
+                    type="checkbox"
+                    value="custom"
+                    checked={gender === 'custom'}
+                    onChange={handleGenderChange}
+                />
+                {translations.custom}
+            </label>
+        </div>
 
         <div className="flex justify-end">
           <button
@@ -205,14 +228,14 @@ const RegisterForm = ({ onClose }) => {
             type="button"
             onClick={handleRegister}
           >
-            Register
+            {translations.register}
           </button>
           <button
             className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="button"
             onClick={onClose}
           >
-            Close
+            {translations.close}
           </button>
         </div>
       </div>

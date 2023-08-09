@@ -49,7 +49,7 @@ const PostForm = () => {
         </div>
         <div className="flex-grow">
           <input
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-[#25fc98]"
             type="text"
             value={formData.content}
             name="content"

@@ -4,6 +4,7 @@ import { pool } from "../db.js";
 
 export const registerUser = async (req, res) => {
     const { user_name, email, password, id_rol, profile_picture, birthday, gender } = req.body;
+    let id;
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -21,11 +22,13 @@ export const registerUser = async (req, res) => {
         const query = 'INSERT INTO users (user_name, email, password, id_rol, profile_picture, birthday, gender) VALUES (?, ?, ?, ?, ?, ?, ?)';
         const values = [user_name, email, hashedPassword, id_rol, profile_picture, birthday, gender];
 
-        await pool.query(query, values);
+        const [result] = await pool.query(query, values);
 
+        id = result.insertId;
+        
         res.status(201).json({
             message: 'Usuario registrado correctamente',
-            user: { user_name, email, id_rol, profile_picture, birthday, gender }
+            user: { id, user_name, email, id_rol, profile_picture, birthday, gender }
         });
     } catch (error) {
         console.error(error);
