@@ -26,8 +26,9 @@ const NewPost = ({ post }) => {
     // const [onDelete, setOnDelete] = useState(false);
     const context = useContext(Context);
     // const translations = useTranslate(Translations(context));
-    const themeBackground = context.clearTheme ? "bg-black-100" : "bg-[#444444]";
-    const textColor = context.clearTheme ? "600" : "100"
+    const themeBackground = context.clearTheme ? "bg-black-100" : "bg-[#333333]";
+
+    const textColor = context.clearTheme ? "text-black-600" : "text-white"
     // const navbarHoverButtonBackground = context.clearTheme ? "hover:bg-[#ffffff]" : "hover:bg-gray-300 hover:text-black-600" ;
 
     const handleEdit = () => {
@@ -43,7 +44,7 @@ const NewPost = ({ post }) => {
     }
 
     return (
-        <div className={`${themeBackground} p-4 rounded-lg shadow m-1 hover:ring-2 hover:ring-[#25fc98] `}>
+        <div className={`${themeBackground} w-full p-4 rounded-lg shadow m-1 hover:ring-2 hover:ring-[#25fc98] `}>
             <div className="flex items-start space-x-4">
                 <div className="flex-shrink-0">
                     <div className="w-12 h-12 rounded-full bg-gray-300 flex items-center justify-center">
@@ -51,8 +52,8 @@ const NewPost = ({ post }) => {
                     </div>
                 </div>
                 <div className="flex-grow">
-                    <div className={`font-bold text-black-${textColor}`}>{post.user_name}</div>
-                    <div className={`text-black-${textColor}`}>{post.content}</div>
+                    <div className={`font-bold ${textColor}`}>{post.user_name}</div>
+                    <div className={`${textColor}`}>{post.content}</div>
                     <div className="text-gray-500 text-sm">{formattedDate}</div>
                 </div>
             </div>

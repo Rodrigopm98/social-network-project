@@ -43,7 +43,8 @@ export const Translations = (par) =>{
     invalidAccountTitle: "Invalid account",
     invalidAccountMessage: "Account already created",
     serverErrorMessage: "Server error",
-    send: "Send"
+    send: "Send",
+    upload: "Upload picture"
 
 }}
 
@@ -90,6 +91,7 @@ if (par.language === 'es') {
         invalidAccountMessage: "La cuenta ya ha sido creada",
         serverErrorMessage: "Error del servidor",
         send: "Enviar",
+        upload: "Seleccione una foto"
     };
 }
 
@@ -136,7 +138,8 @@ if (par.language === 'es') {
             invalidAccountTitle: "Compte non valide",
             invalidAccountMessage: "Compte déjà créé",
             serverErrorMessage: "Erreur du serveur",
-            send:"Envoyer"
+            send:"Envoyer",
+            upload: "Télécharger une photo"
         };
     }
     if (par.language === 'it') {
@@ -182,6 +185,7 @@ if (par.language === 'es') {
             invalidAccountMessage: "Account già creato",
             serverErrorMessage: "Errore del server",
             send: "Invia",
+            upload: "Carica immagine"
         }
     }
     if (par.language === 'ru') {
@@ -227,6 +231,7 @@ if (par.language === 'es') {
             invalidAccountMessage: "Учетная запись уже создана",
             serverErrorMessage: "Ошибка сервера",
             send: "Отправить",
+            upload: "Загрузить изображение"
         };
     }
     if (par.language === 'zh') {
@@ -317,6 +322,7 @@ if (par.language === 'es') {
           invalidAccountMessage: "Conta já criada",
           serverErrorMessage: "Erro do servidor",
           send: "Enviar",
+          upload: "Carregar imagem"
         };
       }
 
