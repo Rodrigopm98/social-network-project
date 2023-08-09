@@ -1,6 +1,6 @@
 import { io } from "socket.io-client";
+import Container from "../container/Container"
 import { useState, useEffect, useRef, useContext } from "react";
-import NavBar from "../NavBar";
 import { Translations } from "../../translations/translations";
 import { Context } from "../../context/Context";
 import { useTranslate } from "../../hooks/useTranslate";
@@ -52,10 +52,12 @@ const Chat = () => {
   useEffect(() => {
     chatRef.current.scrollTop = chatRef.current.scrollHeight;
   }, [messages]);
-
+   
   return (
-    <>
-      <NavBar />
+    <div className="flex">
+      <div className="hidden md:block" >
+        <Container/>
+      </div>
       <div className={`${themeBackground} h-screen mt-14 flex flex-col justify-end items-center p-4 md:w-1/3 md:fixed md:right-0 pb-16  md:border-l-4 md:border-black-100`}>
         <ul ref={chatRef} className="flex-grow w-full overflow-y-scroll">
           {messages.map((message, i) => (
@@ -88,7 +90,7 @@ const Chat = () => {
           </button>
         </form>
       </div>
-    </>
+    </div>
   );
 };
 

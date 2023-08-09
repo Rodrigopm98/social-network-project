@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router';
 import { Context } from '../../context/Context';
 import { Translations } from '../../translations/translations';
 import { useTranslate } from '../../hooks/useTranslate';
+import useAuthStore from '../../store/useAuthStore';
 
 const RegisterForm = ({ onClose }) => {
   const [email, setEmail] = useState('');
@@ -14,7 +15,7 @@ const RegisterForm = ({ onClose }) => {
   const [username, setUsername] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const { showModal, closeModal, modalTitle, modalMessage, showModalWindow } = useModal();
-
+  const { login } = useAuthStore()
   const [birthdate, setBirthdate] = useState('');
   const [gender, setGender] = useState('');
   const navigate = useNavigate();
@@ -122,9 +123,9 @@ const RegisterForm = ({ onClose }) => {
       const response = await axios.post('http://localhost:3000/auth/registro', newUser)
 
       if (response.status === 201) {
-        // const userData = response.data;
-
-        // login(userData) estado global
+        const userData = response.data.user;
+        console.log(response.data.user);
+        login(userData)
         navigate('/home')
       } else {
       showModal(`${translations.error}`, `${translations.errorMessage}`);
