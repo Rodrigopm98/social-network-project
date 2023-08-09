@@ -48,10 +48,10 @@ const Container = () => {
     }
   
     return (
-      <div className={`${themeBackground} mt-14 w-screen`}>
-        <div className={`${styleContainer} `}>
+      <div className={`${themeBackground} border border-green-500 mt-14 w-1/2`}>
+        <div className={`${styleContainer} border border-yellow-600 flex flex-col items-center w-34 sm:w-full`}>
         <PostForm />
-        <div className="mt-4">
+        <div className="mt-4 border border-red-600 sm:w-full">
           {posts.map((post) => (
             <NewPost key={post.id_posts} post={post} />
           ))}

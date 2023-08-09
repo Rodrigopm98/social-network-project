@@ -56,7 +56,7 @@ const UserProfile = () => {
         return <Spinner />;
     }
 
-    const themeBackground = context.clearTheme ? "bg-withe" : "bg-[#333333]";
+    const themeBackground = context.clearTheme ? "bg-black-50" : "bg-[#444444]";
 
     const utcDateFromApi = new Date(userData.birthday);
     const utcMilliseconds = utcDateFromApi.getTime();

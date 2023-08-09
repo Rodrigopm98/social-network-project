@@ -7,9 +7,10 @@ import { Translations } from '../../translations/translations';
 import { useTranslate } from '../../hooks/useTranslate';
 import { Context } from '../../context/Context';
 import Restricted from '../../pages/restricted/Restricted';
+import  upload from '../../assets/upload.jpg'
 
 
-const DEFAULT_IMG = 'https://static.vecteezy.com/system/resources/previews/002/519/144/non_2x/social-media-avatar-free-vector.jpg'
+// const DEFAULT_IMG = 'https://static.vecteezy.com/system/resources/previews/002/519/144/non_2x/social-media-avatar-free-vector.jpg'
 
 export default function UploadPicture(){
   const [selectedFile, setSelectedFile] = useState(null);
@@ -17,9 +18,8 @@ export default function UploadPicture(){
   const { logged_id, isLoggedIn } = useAuthStore()
   const context = useContext(Context);
     const translations = useTranslate(Translations(context));
-    const themeBackground = context.clearTheme ? "bg-black-100" : "bg-[#333333]";
-    const textColor = context.clearTheme ? "600" : "100"
-    // const navbarHoverButtonBackground = context.clearTheme ? "hover:bg-[#ffffff]" : "hover:bg-gray-300 hover:text-black-600" ;
+    const themeBackground = context.clearTheme ? "bg-black-50" : "bg-[#444444]";
+    const textColor = context.clearTheme ? "text-black-600" : "text-white"
 
 
   const handleFileChange = (event) => {
@@ -53,8 +53,8 @@ export default function UploadPicture(){
 }
 
   return (
-    <div className={`w-full max-w-xs mx-auto mt-20 ${themeBackground}`}>
-      <label className={`block mb-2 text-black-${textColor}`}> {translations.selectPicture} </label>
+    <div className={`w-screen h-screen w-full max-w-xs mx-auto flex flex-col justify-center ${themeBackground}`}>
+      <label className={`block mb-2 ${textColor}`}> {translations.selectPicture} </label>
       <input
         type="file"
         accept="image/*"
@@ -62,8 +62,8 @@ export default function UploadPicture(){
         className="w-full mb-4 p-2 border rounded"
         name="profilePicture"
       />
-      {url ? <img src={url} className="w-32 h-32 rounded-full object-cover mx-auto border"/> : <img src={DEFAULT_IMG} className="w-32 h-32 rounded-full object-cover mx-auto border"/>}
-      <button onClick={handleUpload} className='bg-[#25fc98] hover:bg-[#15b575] text-white font-bold py-2 px-4 rounded mx-auto flex my-4'>Subir imagen</button>
+      {url ? <img src={url} className="w-32 h-32 rounded-full object-cover mx-auto border"/> : <img src={upload} className="w-32 h-32 rounded-full object-cover mx-auto border"/>}
+      <button onClick={handleUpload} className="m-4 w- bg-[#25fc98] text-white hover:bg-[#15b575] px-4 py-2 rounded-lg shadow-md">{translations.upload}</button>
     </div>
   );
 }

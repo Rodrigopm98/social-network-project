@@ -17,6 +17,7 @@ const SideBar = ({ showMenu }) => {
   const themeBackground = context.clearTheme ? "bg-black-100" : "bg-[#666666]";
   const textColor = context.clearTheme ? "600" : "100"
   const sideHoverButtonBackground = context.clearTheme ? "hover:bg-[#ffffff]" : "hover:bg-gray-300 hover:text-black-600" ;
+  const cliked = context.clearTheme ? "bg-black-50" : "bg-[#444444]" ;
 
   useEffect(()=>{
     setHiddenMenu(false) 
@@ -46,7 +47,7 @@ const SideBar = ({ showMenu }) => {
                 key={item.name}
             onClick={handleHiddenMenu}
                 title={item.name}
-                className={`my-4 md:my-6 lg:my-8 rounded-tl-xl rounded-bl-xl w-full pt-2 pb-2 ${sideHoverButtonBackground} ${isItemClicked ? "bg-[#444444]" : ""}`}
+                className={`my-4 md:my-6 lg:my-8 rounded-tl-xl rounded-bl-xl w-full pt-2 pb-2 ${sideHoverButtonBackground} ${isItemClicked ? cliked: ""}`}
           >
                 <NavLink
                   to={item.path}
