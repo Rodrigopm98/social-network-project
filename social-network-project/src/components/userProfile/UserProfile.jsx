@@ -1,10 +1,13 @@
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 import { Context } from "../../context/Context";
 import { useTranslate } from "../../hooks/useTranslate";
 import { Translations } from "../../translations/translations";
-import { useParams } from "react-router-dom";
-import axios from "axios";
 import Spinner from "../spinner/Spinner";
 import { useEffect, useState, useContext } from "react";
+import NewPost from '../newPost/NewPost';
+import useAuthStore from '../../store/useAuthStore';
+import Restricted from '../../pages/restricted/Restricted';
 
 const DEFAULT_IMG = 'https://static.vecteezy.com/system/resources/previews/002/519/144/non_2x/social-media-avatar-free-vector.jpg'
 
@@ -14,23 +17,56 @@ const UserProfile = () => {
     const translations = useTranslate(Translations(context));
     const [userData, setUserData] = useState(null);
     const { id } = useParams()
+    const [posts, setPosts] = useState([])
+    const { isLoggedIn } = useAuthStore()
+
 
     useEffect(() => {
-        axios
-            .get(`http://localhost:3000/auth/user/${id}`)
-            .then((response) => {
+        async function fetchUserData() {
+            try {
+                const response = await axios.get(`http://localhost:3000/auth/user/${id}`);
                 setUserData(response.data);
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-            });
+            } catch (error) {
+                console.error("Error al obtener los datos del usuario:", error);
+            }
+        }
+
+        setPosts([])
+        async function fetchPosts() {
+            try {
+                const response = await axios.get(`http://localhost:3000/api/posts/${id}`);
+
+                const sortedPosts = response.data.sort((a, b) => new Date(b.publication_date) - new Date(a.publication_date))
+                setPosts(sortedPosts);
+            } catch (error) {
+                console.error('Error al obtener los posteos:', error);
+
+            }
+        }
+
+        fetchUserData();
+        fetchPosts();
     }, [id]);
 
-    if (!userData) {
+    if(!isLoggedIn){
+        return <Restricted />
+    }
+
+    if (!userData || !posts) {
         return <Spinner />;
     }
 
     const themeBackground = context.clearTheme ? "bg-withe" : "bg-[#333333]";
+
+    const utcDateFromApi = new Date(userData.birthday);
+    const utcMilliseconds = utcDateFromApi.getTime();
+    const millisecondsInDay = 60 * 60 * 1000;
+    const nextDayMilliseconds = utcMilliseconds + millisecondsInDay;
+    const nextDayDate = new Date(nextDayMilliseconds);
+    const day = nextDayDate.getUTCDate();
+    const month = nextDayDate.getUTCMonth() + 1; 
+    const year = nextDayDate.getUTCFullYear();
+    const formattedDate = `${day.toString().padStart(2, '0')}/${month.toString().padStart(2, '0')}/${year}`;
 
     return (
         <div
@@ -56,7 +92,7 @@ const UserProfile = () => {
                         clipRule="evenodd"
                     />
                 </svg>
-                <p className="text-sm text-gray-500">E-mail: {userData.gender}</p>
+                <p className="text-sm text-gray-500">E-mail: {userData.email}</p>
             </div>
             <div className="flex items-center space-x-2 mb-4">
                 <svg
@@ -70,7 +106,7 @@ const UserProfile = () => {
                     />
                 </svg>
                 <p className="text-sm text-gray-500">
-                    {translations.birthday}: {userData.birthday}
+                    {translations.birthday}: {formattedDate}
                 </p>
             </div>
             <div className="flex items-center space-x-2">
@@ -90,6 +126,18 @@ const UserProfile = () => {
                     {translations.gender}: {userData.gender}
                 </p>
             </div>
+            {posts.length > 0 ? (
+                <div className="mt-4">
+                    {posts.map((post) => (
+                        <NewPost key={post.id_posts} post={post} />
+                    ))}
+                </div>
+            ) : (
+                <div className="mt-4">
+                    <h1>Este usuario no tiene posteos realizados.</h1>
+                </div>
+            )}
+
         </div>
     );
 };

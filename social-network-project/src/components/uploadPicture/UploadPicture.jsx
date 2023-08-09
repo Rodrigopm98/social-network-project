@@ -6,6 +6,7 @@ import useAuthStore from '../../store/useAuthStore';
 import { Translations } from '../../translations/translations';
 import { useTranslate } from '../../hooks/useTranslate';
 import { Context } from '../../context/Context';
+import Restricted from '../../pages/restricted/Restricted';
 
 
 const DEFAULT_IMG = 'https://static.vecteezy.com/system/resources/previews/002/519/144/non_2x/social-media-avatar-free-vector.jpg'
@@ -13,7 +14,7 @@ const DEFAULT_IMG = 'https://static.vecteezy.com/system/resources/previews/002/5
 export default function UploadPicture(){
   const [selectedFile, setSelectedFile] = useState(null);
   const [url, setUrl] = useState(null);
-  const { logged_id } = useAuthStore()
+  const { logged_id, isLoggedIn } = useAuthStore()
   const context = useContext(Context);
     const translations = useTranslate(Translations(context));
     const themeBackground = context.clearTheme ? "bg-black-100" : "bg-[#333333]";
@@ -46,6 +47,10 @@ export default function UploadPicture(){
         console.log(error.message, "Error obteniendo la imagen");
     })
   };
+
+  if(!isLoggedIn){
+    return <Restricted />
+}
 
   return (
     <div className={`w-full max-w-xs mx-auto mt-20 ${themeBackground}`}>

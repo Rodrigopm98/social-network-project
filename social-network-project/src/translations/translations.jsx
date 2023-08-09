@@ -2,36 +2,143 @@
 export const Translations = (par) =>{
    
     if (par.language === 'en'){ return{
-    birthday:"Birthday",
+    birthday:"Birth date",
     gender: "Gender",
     signOff:"Sign off",
     searchUser: "Search user",
     placeholderPf: "What are you thinking",
-    selectPicture: "Select an image for your profile picture"
+    selectPicture: "Select an image for your profile picture",
+    creatNaccount:"Create new account",
+    login: "Login",
+    enterYourEmail: "Enter your email",
+    password: "Password",
+    enterPassword: "Enter your password",
+    letsRegister: "Let's register",
+    itsEasy: "It's easy and fast",
+    confirmPassword: "Confirm your password",
+    username: "Enter your username",
+    enterBirthday: "Enter your birth date",
+    female: "Female",
+    male: "Male",
+    custom: "Custom",
+    register: "Register",
+    close:"Close",
+      // Traducciones para las ventanas modales
+    invalidEmail: "Invalid Email",
+    enterValidEmail: "Please enter a valid email address.",
+    passwordsDoNotMatch: "Passwords don't match",
+    passwordsMatchError: "Please make sure the passwords match and try again.",
+    passwordTooShort: "Password too short",
+    passwordLengthError: "Password must have at least 6 characters.",
+    invalidUsername: "Invalid Username",
+    invalidUsernameError: "Username can only contain letters, numbers, and underscores.",
+    missingBirthdate: "Missing Birthdate",
+    missingBirthdateError: "Please enter your birthdate.",
+    invalidAge: "Invalid Age",
+    ageRestrictionError: "You must be at least 18 years old to register.",
+    error: "Error",
+    selectGender: 'Please select a gender.',
+    errorMessage: "An error occurred",
+    fillRequiredFieldsMessage: "Please fill in all required fields.",
+    invalidAccountTitle: "Invalid account",
+    invalidAccountMessage: "Account already created",
+    serverErrorMessage: "Server error",
+    send: "Send"
+
 }}
 
-if (par.language === 'es'){
-   return {
-    birthday:"Fecha de nacimiento",
-    gender:"Género",
-    signOff:"Cerrar Sesión",
-    searchUser: "Buscar usuario",
-    placeholderPf: "¿Qué estás pensando?",
-    selectPicture: "Selccione una imágen para su foto de perfil"
-
-
-    }
-}
-
-if (par.language === 'fr') {
+if (par.language === 'es') {
     return {
-        birthday: "Date de naissance",
-        gender: "Genre",
-        signOff: "Déconnexion",
-        searchUser: "nose",
-        placeholderPf:"bla en frances",
-        selectPicture: "bla"
+        birthday: "Fecha de nacimiento",
+        gender: "Género",
+        signOff: "Cerrar Sesión",
+        searchUser: "Buscar usuario",
+        placeholderPf: "¿Qué estás pensando?",
+        selectPicture: "Seleccione una imagen para su foto de perfil",
+        creatNaccount: "Crear nueva cuenta",
+        login: "Iniciar sesión",
+        enterYourEmail: "Ingrese su correo electrónico",
+        password: "Contraseña",
+        enterPassword: "Ingrese su contraseña",
+        letsRegister: "Regístrate",
+        itsEasy: "Es fácil y rápido",
+        confirmPassword: "Confirmar contraseña",
+        username: "Ingrese su nombre de usuario",
+        enterBirthday: "Ingrese su fecha de nacimiento",
+        female: "Femenino",
+        male: "Masculino",
+        custom: "Personalizado",
+        register: "Registrar",
+        close: "Cerrar",
+        invalidEmail: "Correo electrónico inválido",
+        enterValidEmail: "Por favor ingrese una dirección de correo electrónico válida.",
+        passwordsDoNotMatch: "Las contraseñas no coinciden",
+        passwordsMatchError: "Por favor asegúrese de que las contraseñas coincidan y vuelva a intentarlo.",
+        passwordTooShort: "Contraseña demasiado corta",
+        passwordLengthError: "La contraseña debe tener al menos 6 caracteres.",
+        invalidUsername: "Nombre de usuario inválido",
+        invalidUsernameError: "El nombre de usuario solo puede contener letras, números y guiones bajos.",
+        missingBirthdate: "Fecha de nacimiento faltante",
+        missingBirthdateError: "Por favor ingrese su fecha de nacimiento.",
+        invalidAge: "Edad inválida",
+        ageRestrictionError: "Debe tener al menos 18 años para registrarse.",
+        error: "Error",
+        selectGender: 'Seleccione un género.',
+        errorMessage: "Ocurrió un error",
+        fillRequiredFieldsMessage: "Por favor completa todos los campos requeridos.",
+        invalidAccountTitle: "Cuenta no válida",
+        invalidAccountMessage: "La cuenta ya ha sido creada",
+        serverErrorMessage: "Error del servidor",
+        send: "Enviar",
     };
 }
 
+
+    if (par.language === 'fr') {
+        return {
+            birthday: "Date de naissance",
+            gender: "Genre",
+            signOff: "Déconnexion",
+            searchUser: "Recherche d'utilisateur",
+            placeholderPf: "Que pensez-vous",
+            selectPicture: "Sélectionnez une image pour votre photo de profil",
+            creatNaccount: "Créer un nouveau compte",
+            login: "Connexion",
+            enterYourEmail: "Entrez votre adresse e-mail",
+            password: "Mot de passe",
+            enterPassword: "Entrez votre mot de passe",
+            letsRegister: "S'inscrire",
+            itsEasy: "C'est facile et rapide",
+            confirmPassword: "Confirmez votre mot de passe",
+            username: "Entrez votre nom d'utilisateur",
+            enterBirthday: "Entrez votre date de naissance",
+            female: "Femme",
+            male: "Homme",
+            custom: "Personnalisé",
+            register: "S'inscrire",
+            close: "Fermer",
+            invalidEmail: "Email invalide",
+            enterValidEmail: "Veuillez entrer une adresse email valide.",
+            passwordsDoNotMatch: "Les mots de passe ne correspondent pas",
+            passwordsMatchError: "Assurez-vous que les mots de passe correspondent et réessayez.",
+            passwordTooShort: "Mot de passe trop court",
+            passwordLengthError: "Le mot de passe doit comporter au moins 6 caractères.",
+            invalidUsername: "Nom d'utilisateur invalide",
+            invalidUsernameError: "Le nom d'utilisateur ne peut contenir que des lettres, des chiffres et des traits de soulignement.",
+            missingBirthdate: "Date de naissance manquante",
+            missingBirthdateError: "Veuillez entrer votre date de naissance.",
+            invalidAge: "Âge invalide",
+            ageRestrictionError: "Vous devez avoir au moins 18 ans pour vous inscrire.",
+            error: "Erreur",
+            selectGender: 'Veuillez sélectionner un genre.',
+            errorMessage: "Une erreur est survenue",
+            fillRequiredFieldsMessage: "Veuillez remplir tous les champs requis.",
+            invalidAccountTitle: "Compte non valide",
+            invalidAccountMessage: "Compte déjà créé",
+            serverErrorMessage: "Erreur du serveur",
+            send:"Envoyer"
+        };
+    }
+
 }
+
