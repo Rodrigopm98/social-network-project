@@ -17,7 +17,7 @@ const Container = () => {
     const [styleContainer, setStyleContainer] = useState("")
 
     // const translations = useTranslate(Translations(context));
-    const themeBackground = context.clearTheme ? "bg-black-100" : "bg-[#333333]";
+    const themeBackground = context.clearTheme ? "bg-black-50" : "bg-[#444444]";
     // const textColor = context.clearTheme ? "600" : "100"
     // const navbarHoverButtonBackground = context.clearTheme ? "hover:bg-[#ffffff]" : "hover:bg-gray-300 hover:text-black-600" ;
 
