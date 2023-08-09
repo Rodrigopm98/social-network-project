@@ -5,6 +5,8 @@ import axios from 'axios';
 import { Context } from '../../context/Context';
 // import { useTranslate } from '../../hooks/useTranslate';
 // import { Translations } from '../../translations/translations';
+import useAuthStore from '../../store/useAuthStore';
+import Restricted from '../../pages/restricted/Restricted';
 
 const Container = () => {
     const [posts, setPosts] = useState([]);
@@ -13,6 +15,7 @@ const Container = () => {
     const themeBackground = context.clearTheme ? "bg-black-100" : "bg-[#333333]";
     // const textColor = context.clearTheme ? "600" : "100"
     // const navbarHoverButtonBackground = context.clearTheme ? "hover:bg-[#ffffff]" : "hover:bg-gray-300 hover:text-black-600" ;
+    const { isLoggedIn } = useAuthStore()
 
 
     
@@ -31,6 +34,10 @@ const Container = () => {
   
       fetchPosts();
     }, [posts]);
+
+    if(!isLoggedIn){
+      return <Restricted/>
+    }
   
     return (
       <div className={`${themeBackground} mx-auto mt-12 p-4 w-full flex flex-col items-center`}>
