@@ -36,7 +36,7 @@ const SelectLanguage = () => {
       <div className="relative flex justify-center items-center">
         <div onClick={() => setIsOpen(!isOpen)}>
           <div className="flex items-center p-1">
-            <FlagIcon code={LANGUAGES[selectedLanguage]} size={40} />
+            <FlagIcon code={LANGUAGES[selectedLanguage]} size={50} />
             <ChevronDownIcon className="ml-2 h-5 w-5" />
           </div>
         </div>
