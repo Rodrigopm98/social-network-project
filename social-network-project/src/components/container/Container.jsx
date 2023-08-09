@@ -4,7 +4,7 @@ import NewPost from '../newPost/NewPost';
 import axios from 'axios';
 import { Context } from '../../context/Context';
 import { useLocation } from 'react-router-dom';
-import Chat from "../chat/Chat"
+// import Chat from "../chat/Chat"
 // import { useTranslate } from '../../hooks/useTranslate';
 // import { Translations } from '../../translations/translations';
 import useAuthStore from '../../store/useAuthStore';
@@ -48,7 +48,7 @@ const Container = () => {
     }
   
     return (
-      <div className={`${themeBackground} mt-14 w-screen border-t-2`}>
+      <div className={`${themeBackground} mt-14 w-screen`}>
         <div className={`${styleContainer} `}>
         <PostForm />
         <div className="mt-4">

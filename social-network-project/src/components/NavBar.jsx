@@ -9,6 +9,7 @@ import { useTranslate } from "../hooks/useTranslate";
 import { Translations } from "../translations/translations";
 import SelectLanguage from "../components/selectLanguage/selectLanguage"
 import ChangeMode from "../components/changeMode/ChangeMode"
+import { RiLogoutCircleRLine } from "react-icons/ri";
 
 
 const NavBar = () => {
@@ -18,7 +19,7 @@ const NavBar = () => {
     const navigate = useNavigate()
     const context = useContext(Context);
     const translations = useTranslate(Translations(context));
-    const themeBackground = context.clearTheme ? "bg-black-100" : "bg-[#333333]";
+    const themeBackground = context.clearTheme ? "bg-black-100" : "bg-[#666666]";
     const textColor = context.clearTheme ? "600" : "100"
     const navbarHoverButtonBackground = context.clearTheme ? "hover:bg-[#ffffff]" : "hover:bg-gray-300 hover:text-black-600" ;
     const { isLoggedIn } = useAuthStore()
@@ -79,7 +80,7 @@ const NavBar = () => {
                     <li className={`text-4xl md:mr-4 text-black-${textColor} ${navbarHoverButtonBackground} rounded-lg`} ><SelectLanguage/></li>
                     <li className={`text-4xl md:mr-4 text-black-${textColor} ${navbarHoverButtonBackground} rounded-lg`}><ChangeMode/></li>
                     {
-                        isLoggedIn ?  <li><button className="mr-4 bg-[#25fc98] text-white hover:bg-[#15b575] px-4 py-2 rounded-lg shadow-md" onClick={handleLogout}>{translations.signOff}</button></li>: 
+                        isLoggedIn ?  <li><button className="mr-4 w- bg-[#25fc98] text-white hover:bg-[#15b575] px-4 py-2 rounded-lg shadow-md" onClick={handleLogout}><RiLogoutCircleRLine/></button></li>: 
                         null    
                     }
                 </ul>
