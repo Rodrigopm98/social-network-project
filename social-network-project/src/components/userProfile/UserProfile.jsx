@@ -6,6 +6,8 @@ import { Translations } from "../../translations/translations";
 import Spinner from "../spinner/Spinner";
 import { useEffect, useState, useContext } from "react";
 import NewPost from '../newPost/NewPost';
+import useAuthStore from '../../store/useAuthStore';
+import Restricted from '../../pages/restricted/Restricted';
 
 const DEFAULT_IMG = 'https://static.vecteezy.com/system/resources/previews/002/519/144/non_2x/social-media-avatar-free-vector.jpg'
 
@@ -16,6 +18,7 @@ const UserProfile = () => {
     const [userData, setUserData] = useState(null);
     const { id } = useParams()
     const [posts, setPosts] = useState([])
+    const { isLoggedIn } = useAuthStore()
 
 
     useEffect(() => {
@@ -44,6 +47,10 @@ const UserProfile = () => {
         fetchUserData();
         fetchPosts();
     }, [id]);
+
+    if(!isLoggedIn){
+        return <Restricted />
+    }
 
     if (!userData || !posts) {
         return <Spinner />;

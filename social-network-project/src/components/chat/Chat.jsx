@@ -53,6 +53,7 @@ const Chat = () => {
     chatRef.current.scrollTop = chatRef.current.scrollHeight;
   }, [messages]);
 
+
   return (
     <>
       <NavBar />
