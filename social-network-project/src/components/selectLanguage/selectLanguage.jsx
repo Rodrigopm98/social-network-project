@@ -8,10 +8,10 @@ const LANGUAGES = {
   en: "US",
   es: "ES",
   fr: "FR",
-  // it: "IT",
-  // ru: "RU",
-  // zh: "CN",
-  // pt: "PT"
+  it: "IT",
+  ru: "RU",
+  zh: "CN",
+  pt: "PT"
 };
 
 const SelectLanguage = () => {
