@@ -82,7 +82,6 @@ const NavBar = () => {
                         isLoggedIn ?  <li><button className="mr-4 bg-[#25fc98] text-white hover:bg-[#15b575] px-4 py-2 rounded-lg shadow-md" onClick={handleLogout}>{translations.signOff}</button></li>: 
                         null    
                     }
-                   
                 </ul>
             </nav>
             <SideBar showMenu={showMenu} />
