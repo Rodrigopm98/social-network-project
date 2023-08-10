@@ -4,9 +4,6 @@ import NewPost from '../newPost/NewPost';
 import axios from 'axios';
 import { Context } from '../../context/Context';
 import { useLocation } from 'react-router-dom';
-// import Chat from "../chat/Chat"
-// import { useTranslate } from '../../hooks/useTranslate';
-// import { Translations } from '../../translations/translations';
 import useAuthStore from '../../store/useAuthStore';
 import Restricted from '../../pages/restricted/Restricted';
 
@@ -16,10 +13,8 @@ const Container = () => {
     const [urlLocation, setUrlLocation] = useState(useLocation().pathname)
     const [styleContainer, setStyleContainer] = useState("")
 
-    // const translations = useTranslate(Translations(context));
     const themeBackground = context.clearTheme ? "bg-black-50" : "bg-[#444444]";
-    // const textColor = context.clearTheme ? "600" : "100"
-    // const navbarHoverButtonBackground = context.clearTheme ? "hover:bg-[#ffffff]" : "hover:bg-gray-300 hover:text-black-600" ;
+   
 
     const { isLoggedIn } = useAuthStore()
   

@@ -1,24 +1,9 @@
-// import { Outlet } from "react-router-dom";
-// import NavBar from "./components/NavBar"
+import Holder from "./components/holder/Holder"
 
-// function App() {
-  
-//   return (
-//     <>
-//       <NavBar/>
-//       <Outlet/>
-      
-//     </>
-//   )
-// }
-
-// export default App
-
-import Probando from "./components/orobando/Probando"
 const App = () =>{
 return (
   <>
-  <Probando/>
+  <Holder/>
   </>
 )
 }

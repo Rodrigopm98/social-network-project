@@ -6,10 +6,8 @@ import useAuthStore from '../../store/useAuthStore';
 import useEditAndDeleteModal from '../../hooks/useEditAndDeleteModal'
 import { useState } from 'react';
 import EditAndDeleteModal from '../editAndDeleteModal/EditAndDeleteModal';
-// import { Translations } from '../../translations/translations';
 import { useContext } from 'react';
 import { Context } from '../../context/Context';
-// import { useTranslate } from '../../hooks/useTranslate';
 
 
 const DEFAULT_IMG = 'https://static.vecteezy.com/system/resources/previews/002/519/144/non_2x/social-media-avatar-free-vector.jpg'
@@ -23,23 +21,18 @@ const NewPost = ({ post }) => {
     const formattedDate = format(zonedDate, 'MMMM dd, yyyy HH:mm', { timeZone });
     const { showModal, closeModal, showModalWindow } = useEditAndDeleteModal();
     const [isEdit, setIsEdit] = useState(false);
-    // const [onDelete, setOnDelete] = useState(false);
     const context = useContext(Context);
-    // const translations = useTranslate(Translations(context));
     const themeBackground = context.clearTheme ? "bg-black-100" : "bg-[#333333]";
 
     const textColor = context.clearTheme ? "text-black-600" : "text-white"
-    // const navbarHoverButtonBackground = context.clearTheme ? "hover:bg-[#ffffff]" : "hover:bg-gray-300 hover:text-black-600" ;
 
     const handleEdit = () => {
-        // setOnDelete(false)
         setIsEdit(true);
         showModal();
     };
 
     const handleDelete = () => {
         setIsEdit(false)
-        // setOnDelete(true);
         showModal();
     }
 
