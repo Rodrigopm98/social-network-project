@@ -2,9 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
+import { ContextProvider } from "./provider/ContextProvider";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+    <ContextProvider>
+        <RouterProvider router={browserRouter} fallbackElement={<p>Loading...</p>}/>
+    </ContextProvider>
   </React.StrictMode>,
 )
