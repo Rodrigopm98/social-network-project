@@ -34,8 +34,8 @@ const Container = () => {
     }, [posts]);
 
     useEffect(()=>{
-     if(urlLocation == "/home"){setStyleContainer(" w-5/6 m-auto pt-7 ")}
-     else{setStyleContainer(" ml-28 w-1/2 ")}
+     if(urlLocation == "/home"){setStyleContainer(" w-5/6 m-auto pt-7 lg:w-1/2 ")}
+     else{setStyleContainer("w-2/3 ml-8 lg:m-auto lg:w-full lg:ml-10")}
     },[])
 
     if(!isLoggedIn){
@@ -43,10 +43,10 @@ const Container = () => {
     }
   
     return (
-      <div className={`${themeBackground} border border-green-500 mt-14 w-1/2`}>
-        <div className={`${styleContainer} border border-yellow-600 flex flex-col items-center w-34 sm:w-full`}>
+      <div className={`${themeBackground} mt-14 md:ml-16`}>
+        <div className={`${styleContainer} `}>
         <PostForm />
-        <div className="mt-4 border border-red-600 sm:w-full">
+        <div className="mt-4">
           {posts.map((post) => (
             <NewPost key={post.id_posts} post={post} />
           ))}

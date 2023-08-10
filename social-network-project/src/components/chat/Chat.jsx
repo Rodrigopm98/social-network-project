@@ -53,10 +53,10 @@ const Chat = () => {
    
   return (
     <div className="flex">
-      <div className="hidden md:block" >
+      <div className="hidden md:block lg:w-2/5" >
         <Container/>
       </div>
-      <div className={`${themeBackground} h-screen mt-14 flex flex-col justify-end items-center p-4 md:w-1/3 md:fixed md:right-0 pb-16  md:border-l-4 md:border-black-100`}>
+      <div className={`${themeBackground} h-screen w-full mt-14 flex flex-col justify-end items-center p-4 md:w-1/2 md:fixed md:right-0 pb-16  md:border-l-4 md:border-black-100`}>
         <ul ref={chatRef} className="flex-grow w-full overflow-y-scroll">
           {messages.map((message, i) => (
             <li
