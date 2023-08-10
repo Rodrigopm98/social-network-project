@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
-import NotFound from "../components/notFound/NotFound";
+import NotFound from "../pages/not-found/NotFound";
 import Container from "../components/container/Container";
 import LoginForm from "../components/loginForm/LoginForm";
 import UploadPicture from "../components/uploadPicture/UploadPicture";

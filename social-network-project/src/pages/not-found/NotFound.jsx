@@ -1,10 +1,15 @@
-export default function NotFound(){
-    return (
-      <div className="flex justify-center items-center min-h-screen bg-gray-100">
-        <div className="p-8 bg-white rounded-lg shadow-md">
-          <h1 className="text-4xl font-bold mb-4">404 Not Found</h1>
-          <p className="text-lg text-gray-600">Oops! The page you&apos;re looking for does not exist.</p>
-        </div>
-      </div>
-    );
-}
+import error404 from "../../assets/error404.gif"
+const NotFound = () => {
+  return (
+    <div className="flex flex-col items-center mt-20">
+      <h1 className="text-center text-4xl md:text-6xl">Error 404 - PAGE NOT FOUND</h1>
+      <img
+        src={error404}
+        alt="Error 404"
+        className="mt-8 md:mt-16 w-96 md:w-2/4"
+      />
+    </div>
+  );
+};
+
+export default NotFound;
