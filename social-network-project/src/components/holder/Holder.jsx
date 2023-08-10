@@ -3,7 +3,7 @@ import NavBar from "../NavBar";
 import { Context } from "../../context/Context";
 import { useContext } from "react";
 
-const Probando = () => {
+const Holder = () => {
     const context = useContext(Context);
     const themeBackground = context.clearTheme ? "bg-black-50" : "bg-[#444444]";
 
@@ -17,4 +17,4 @@ const Probando = () => {
   )
 }
 
-export default Probando
+export default Holder

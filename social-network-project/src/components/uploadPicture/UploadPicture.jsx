@@ -12,7 +12,6 @@ import useModal from '../../hooks/useModal';
 import Modal from '../Modal/Modal';
 
 
-// const DEFAULT_IMG = 'https://static.vecteezy.com/system/resources/previews/002/519/144/non_2x/social-media-avatar-free-vector.jpg'
 
 export default function UploadPicture() {
   const [selectedFile, setSelectedFile] = useState(null);

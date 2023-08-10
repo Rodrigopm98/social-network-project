@@ -16,9 +16,7 @@ const Chat = () => {
   const context = useContext(Context);
   const translations = useTranslate(Translations(context));
   const themeBackground = context.clearTheme ? "bg-black-50" : "bg-[#333333]";
-  // const textColor = context.clearTheme ? "600" : "100"
-  // const navbarHoverButtonBackground = context.clearTheme ? "hover:bg-[#ffffff]" : "hover:bg-gray-300 hover:text-black-600" ;
-
+  
   
   const handleSubmit = (event) => {
     event.preventDefault();
