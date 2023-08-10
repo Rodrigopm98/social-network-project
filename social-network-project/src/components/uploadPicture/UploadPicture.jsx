@@ -11,8 +11,6 @@ import upload from '../../assets/upload.jpg'
 import useModal from '../../hooks/useModal';
 import Modal from '../Modal/Modal';
 
-
-
 export default function UploadPicture() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [url, setUrl] = useState(null);
@@ -25,18 +23,18 @@ export default function UploadPicture() {
 
 
   const handleFileChange = (event) => {
-
-
     if (event.target.files[0]) {
       setSelectedFile(event.target.files[0]);
     }
   };
 
   const handleUpload = async () => {
-    if(selectedFile != null) {
+    if (selectedFile != null) {
+      //sube la imagen al storage de firebase y la guarda en una carpeta user por cada usuario, con todas las fotos que el usuario subió.
       const imageRef = ref(storage, `/user-${logged_id}/image-${Date.now()}`)
       uploadBytes(imageRef, selectedFile).then(() => {
         getDownloadURL(imageRef).then((url) => {
+          //obtiene la URL de firebase y la guarda en la base de datos.
           setUrl(url)
           axios.patch(`http://localhost:3000/auth/user/${logged_id}`, {
             profile_picture: url
@@ -49,7 +47,7 @@ export default function UploadPicture() {
       }).catch(() => {
         showModal('Error', "Error obteniendo la imagen");
       })
-    }else{
+    } else {
       showModal('Error', 'Primero seleccione una foto.')
     }
   };
@@ -59,7 +57,7 @@ export default function UploadPicture() {
   }
 
   return (
-    <div className={`w-screen h-screen w-full max-w-xs mx-auto flex flex-col justify-center ${themeBackground}`}>
+    <div className={`h-screen max-w-xs mx-auto flex flex-col justify-center ${themeBackground}`}>
       <label className={`block mb-2 ${textColor}`}> {translations.selectPicture} </label>
       <input
         type="file"
@@ -72,9 +70,9 @@ export default function UploadPicture() {
       <button onClick={handleUpload} className="m-4 w- bg-[#25fc98] text-white hover:bg-[#15b575] px-4 py-2 rounded-lg shadow-md">{translations.upload}</button>
       {showModalWindow && (
         <Modal
-            modalTitle={modalTitle}
-            modalMessage={modalMessage}
-            onClose={() => closeModal()}
+          modalTitle={modalTitle}
+          modalMessage={modalMessage}
+          onClose={() => closeModal()}
         />
       )}
     </div>
