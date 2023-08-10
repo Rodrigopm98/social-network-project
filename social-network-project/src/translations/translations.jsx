@@ -44,9 +44,18 @@ export const Translations = (par) =>{
     invalidAccountMessage: "Account already created",
     serverErrorMessage: "Server error",
     send: "Send",
-    upload: "Upload picture"
-
-}}
+    upload: "Upload picture",
+    editPost: 'Edit Post',
+    deletePost: 'Delete Post',
+    contentLabel: 'Content:',
+    save: 'Save',
+    delete: 'Delete',
+    areYouSure: 'Are you sure?',
+    errorEdit: 'There was an error editing the post.',
+    errorDelete: 'There was an error deleting the post.',
+    cancel: 'Cancel',
+}
+}
 
 if (par.language === 'es') {
     return {
@@ -91,7 +100,17 @@ if (par.language === 'es') {
         invalidAccountMessage: "La cuenta ya ha sido creada",
         serverErrorMessage: "Error del servidor",
         send: "Enviar",
-        upload: "Seleccione una foto"
+        upload: "Seleccione una foto",
+        editPost: 'Editar Publicación',
+        deletePost: 'Eliminar Publicación',
+        contentLabel: 'Contenido:',
+        save: 'Guardar',
+        delete: 'Eliminar',
+        areYouSure: '¿Estás seguro?',
+        errorEdit: 'Hubo un error al editar la publicación.',
+        errorDelete: 'Hubo un error al eliminar la publicación.',
+        cancel: 'Cancelar',
+        
     };
 }
 
@@ -139,7 +158,16 @@ if (par.language === 'es') {
             invalidAccountMessage: "Compte déjà créé",
             serverErrorMessage: "Erreur du serveur",
             send:"Envoyer",
-            upload: "Télécharger une photo"
+            upload: "Télécharger une photo",
+            editPost: 'Modifier la Publication',
+            deletePost: 'Supprimer la Publication',
+            contentLabel: 'Contenu :',
+            save: 'Enregistrer',
+            delete: 'Supprimer',
+            areYouSure: 'Êtes-vous sûr ?',
+            errorEdit: 'Une erreur est survenue lors de la modification de la publication.',
+            errorDelete: 'Une erreur est survenue lors de la suppression de la publication.',
+            cancel: 'Annuler',
         };
     }
     if (par.language === 'it') {
@@ -185,7 +213,16 @@ if (par.language === 'es') {
             invalidAccountMessage: "Account già creato",
             serverErrorMessage: "Errore del server",
             send: "Invia",
-            upload: "Carica immagine"
+            upload: "Carica immagine",
+            editPost: 'Modifica Post',
+            deletePost: 'Elimina Post',
+            contentLabel: 'Contenuto:',
+            save: 'Salva',
+            delete: 'Elimina',
+            areYouSure: 'Sei sicuro?',
+            errorEdit: 'Si è verificato un errore durante la modifica del post.',
+            errorDelete: 'Si è verificato un errore durante l\'eliminazione del post.',
+            cancel: 'Annulla',
         }
     }
     if (par.language === 'ru') {
@@ -231,7 +268,16 @@ if (par.language === 'es') {
             invalidAccountMessage: "Учетная запись уже создана",
             serverErrorMessage: "Ошибка сервера",
             send: "Отправить",
-            upload: "Загрузить изображение"
+            upload: "Загрузить изображение",
+            editPost: 'Редактировать Пост',
+            deletePost: 'Удалить Пост',
+            contentLabel: 'Содержание:',
+            save: 'Сохранить',
+            delete: 'Удалить',
+            areYouSure: 'Вы уверены?',
+            errorEdit: 'Произошла ошибка при редактировании поста.',
+            errorDelete: 'Произошла ошибка при удалении поста.',
+            cancel: 'Отмена',
         };
     }
     if (par.language === 'zh') {
@@ -277,6 +323,15 @@ if (par.language === 'es') {
             invalidAccountMessage: "帐户已创建",
             serverErrorMessage: "服务器错误",
             send: "发送",
+            editPost: '编辑帖子',
+            deletePost: '删除帖子',
+            contentLabel: '内容：',
+            save: '保存',
+            delete: '删除',
+            areYouSure: '您确定吗？',
+            errorEdit: '编辑帖子时出错。',
+            errorDelete: '删除帖子时出错。',
+            cancel: '取消',
         };
       }
       if (par.language === 'pt') {
@@ -322,7 +377,16 @@ if (par.language === 'es') {
           invalidAccountMessage: "Conta já criada",
           serverErrorMessage: "Erro do servidor",
           send: "Enviar",
-          upload: "Carregar imagem"
+          upload: "Carregar imagem",
+          editPost: 'Editar Postagem',
+          deletePost: 'Excluir Postagem',
+          contentLabel: 'Conteúdo:',
+          save: 'Salvar',
+          delete: 'Excluir',
+          areYouSure: 'Tem certeza?',
+          errorEdit: 'Ocorreu um erro ao editar a postagem.',
+          errorDelete: 'Ocorreu um erro ao excluir a postagem.',
+          cancel: 'Cancelar',
         };
       }
 
