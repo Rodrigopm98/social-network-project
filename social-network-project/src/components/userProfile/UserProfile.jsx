@@ -127,7 +127,7 @@ const UserProfile = () => {
                 </p>
             </div>
             {posts.length > 0 ? (
-                <div className="mt-4">
+                <div className="mt-4 w-2/3">
                     {posts.map((post) => (
                         <NewPost key={post.id_posts} post={post} />
                     ))}
